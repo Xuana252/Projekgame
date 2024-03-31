@@ -3,9 +3,14 @@
 #include<Windows.h>
 #include<D3D10.h>
 #include<D3DX10.h>
+#include<dinput.h>
 
 #include"Texture.h"
-#define MAX_FPS 100	
+#include"KeyEventHandler.h"
+#define DIRECTINPUT_VERSION 0x0800
+#define MAX_FPS 60
+#define KEYBOARD_BUFFER_SIZE 1024
+#define KEYBOARD_STATE_SIZE 256
 
 class Game
 {
@@ -22,8 +27,18 @@ class Game
 
 	ID3DX10Sprite* spriteObject = NULL;
 
+	LPDIRECTINPUT8	di;
+	LPDIRECTINPUTDEVICE8 didv;
+
+	BYTE  keyStates[KEYBOARD_STATE_SIZE];			// DirectInput keyboard state buffer 
+	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
+
+	LPKEYEVENTHANDLER keyHandler;
+
+	HINSTANCE hInstance;
+
 public:
-	void Init(HWND hWnd);
+	void Init(HWND hWnd,HINSTANCE hInstance);
 
 	void Draw(float x, float y, LPTEXTURE tex, RECT* rect = NULL);
 
@@ -38,6 +53,10 @@ public:
 	}
 
 	LPTEXTURE LoadTexture(LPCWSTR texturePath);
+
+	void InitKeyboard(LPKEYEVENTHANDLER handler);
+	int IsKeyDown(int KeyCode);
+	void ProcessKeyboard();
 
 	ID3D10Device* GetDirect3DDevice() { return this->pD3DDevice; }
 	IDXGISwapChain* GetSwapChain() { return this->pSwapChain; }

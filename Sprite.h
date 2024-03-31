@@ -11,7 +11,7 @@ class Sprite
 	int top;
 	int right;
 	int bottom;
-
+	int flip = 1;
 	LPTEXTURE texture;
 	D3DX10_SPRITE sprite;
 	D3DXMATRIX matScaling;

@@ -13,15 +13,6 @@ void Camera::SetMap(LPSPRITE map)
 {
 	this->map = map;
 }
-float Camera::ConvertX(float x)
-{
-	return WORLD_WIDTH/2-x;
-}
-float Camera::ConvertY(float y)
-{
-	
-	return y-WORLD_HEIGHT/2;
-}
 float Camera::ConvertWorldX(float x)
 {
 	return x - this->x;
@@ -48,7 +39,7 @@ void Camera::Update(DWORD dt,Player* player)
 }
 void Camera::Render()
 {
-	float Cx = ConvertX(x);
-	float Cy = ConvertY(y);
+	float Cx = ConvertWorldX(WORLD_WIDTH/2);
+	float Cy = ConvertWorldY(WORLD_HEIGHT/2);
 	this->map->Draw(Cx, Cy);
 }

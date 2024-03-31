@@ -2,7 +2,7 @@
 #include<Windows.h>
 #include"Sprite.h"
 #include"Player.h"
-#define WORLD_WIDTH 3584
+#define WORLD_WIDTH 3328
 #define WORLD_HEIGHT 240
 class Camera
 {
@@ -21,8 +21,6 @@ public:
 		this->height = Height;
 	}
 	void SetMap(LPSPRITE tex);
-	float ConvertX(float x);
-	float ConvertY(float y);
 	float ConvertWorldX(float x);
 	float ConvertWorldY(float y);
 	float getx() { return x; }
